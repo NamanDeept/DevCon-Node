@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>NodeJS</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style>
+			h5 {
+				position: fixed; 
+				width: 100%; 
+				text-align: center; 
+				bottom: 10%;
+			} 
+			img {
+				border: 0;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-background-image="./lib/nodejs.svg"
+				data-background-size="30%"
+				data-background-position="50% 25%">
+				
+					<h3>
+						An short introduction <!-- .element:  -->
+					</h3>
+					<h5 class=".center_s">
+						<a href="https://github.com">Chaitanya Mukka</a>
+					</h5>
+				</section>
+
+				<section data-background-color="#fafdfd">
+					<h2>History</h2>
+					<section data-markdown>
+							<textarea data-template>
+								 - **May, 2009** : NodeJS was created by Ryan Dahl
+
+
+								 <img src="./lib/mem1.jpg" alt="mem1" style="text-align: center">
+							</textarea>
+					</section>
+
+					<section data-markdown>
+							<textarea data-template>
+								 - **January, 2010** : [npm](https://npmjs.com) was introduced. ExpressJS released.
+
+
+								 <img src="./lib/Npm-logo.svg" alt="npm" style="text-align: center">
+							</textarea>
+					</section>
+
+					<section data-markdown>
+							<textarea data-template>
+								 - **December, 2014** : [io.js](https://iojs.com) was forked out of NodeJS, 
+								 to maintain it under `open governance model`. 
+							</textarea>
+					</section>
+
+					<section data-markdown>
+							<textarea data-template>
+								 - **September, 2015** : NodeJS foundation was formed and `io.js` was merged. 
+							</textarea>
+					</section>
+
+					<section data-markdown>
+							<textarea data-template>
+								 - **May, 2016** : `leftpad` incident. npm had `200k+` users.
+							</textarea>
+					</section>
+
+					<section data-markdown>
+							<textarea data-template>
+								 - **2017** : `8.8mi` Node instances; `3bi.` npm packages downloaded/week.
+
+
+								 <img src="./lib/stat.png" alt="stat" style="text-align: center;width: 68%;">
+							</textarea>
+					</section>
+
+				</section>
+
+				<section>
+					<h2>What is NodeJS?</h2>
+					<p class="fragment fade-left visible" data-fragment-index="0">It's not a new Language.</p>
+					<p class="fragment fade-left visible" data-fragment-index="1">It's not a framework.</p>
+					<p class="fragment fade-left visible current-fragment" data-fragment-index="2">It's not a JavaScript library.</p>
+				</section>
+
+				<section data-markdown>
+						<textarea data-template>
+							According to their website:
+							
+							> Node.js® is a JavaScript **<span style="color: mediumseagreen;">runtime</span>** built on Chrome’s  **<span style="color: mediumseagreen;">V8</span>** JavaScript engine.
+
+							> Node.js uses an **<span style="color: mediumseagreen;">event-driven, non-blocking I/O</span>** model that makes it lightweight and efficient.
+						
+							> Node.js’ package ecosystem,  **<span style="color: mediumseagreen;">npm</span>**, is the largest ecosystem of open source libraries in the world.
+							
+						</textarea>
+				</section>
+				<section data-background-image="./lib/mem2.jpg" 
+				data-background-size="60%" 
+				data-background-transparent="0.5"></section>
+
+				<section data-markdown data-separator="!---" data-separator-vertical="u---">
+					<script type="text/template">
+						## <span style="color: mediumseagreen"> JavaScript Runtime </span>
+						- JavaScript and Node.js run on the V8 JavaScript runtime engine. <!-- .element: class="fragment" data-fragment-index="1" -->
+						- This engine takes your JavaScript code and converts it into a faster machine code. <!-- .element: class="fragment" data-fragment-index="2" -->
+						- Machine code is low-level code which the computer can run without needing to first interpret it. <!-- .element: class="fragment" data-fragment-index="3" -->
+
+
+						u---
+						
+						JavaScript **<span style="color: mediumseagreen">interpreter / compiler</span>** that used Chrome. Open sourced by Google in 2008.
+ 
+
+
+						![v8](./lib/v8.png)
+
+						!---
+						
+						## <span style="color: mediumseagreen"> Event Driven </span>
+						
+						The execution of the code is done based on events, asynchronously.
+
+
+						u---
+
+						## <span style="color: mediumseagreen"> Non Blocking I/O </span>
+						
+						The I/O operations (network, files, etc.) never block.
+						
+
+						<img src="./lib/mem0.jpg" alt="fast" style="text-align: center;">
+
+
+
+						u---
+
+
+						<img src="./lib/blk.svg" alt="blk" style="border: 0;">
+
+
+						u---
+
+						## <span style="color: mediumseagreen"> Single Threaded </span>
+						
+						It runs in a single thread of execution.
+						
+						
+						u---
+						
+						##  Event Loop 
+						
+
+						<img src="./lib/event.png" alt="event">
+
+						
+						u---
+
+
+						<img src="./lib/mem3.png" alt="show">
+
+
+						u---
+
+						Blocking
+						```js
+						const fs = require('fs');
+						const data = fs.readFileSync('/file.md'); // blocks here 
+						console.log(data);
+						// moreWork(); will run after console.log
+						```
+
+						Non Blocking
+						```js
+						const fs = require('fs');
+						fs.readFile('/file.md', (err, data) => {
+							if (err) throw err;
+							console.log(data);
+						});
+						// moreWork(); will run before console.log
+
+						```
+
+						!---
+
+						These features make Node ideal for **<span style="color: mediumseagreen">web applications</span>** of 
+						**<span style="color: mediumseagreen">high performance,
+						distributed, highly scalable</span>** and **<span style="color: mediumseagreen">real - time</span>**.
+						
+
+						!---
+
+						## <span style="color: mediumseagreen">TL;DR </span>
+						It is JavaScript execution environment on the server.
+						It allows to execute JavaScript code outside the browser.
+
+						<img src="./lib/server.png" alt="serv">
+
+						!---
+						<!-- .slide: data-background="#ffffff" -->
+						# Live Coding 
+						
+						u---
+
+						Install [node](https://nodejs.org/en/download/)
+
+						```sh
+						$ npm -v  #check npm's installed
+						```
+						
+						u---
+						<!-- .slide: data-background="#ffffff" -->
+
+						## Lets write a small web server 
+
+						u---
+
+						```js
+						const http = require('http'),
+						server = http.createServer((req, res) => {
+							res.writeHead(200,{'Content-Type':'text/plain'});
+							res.write('Hello World!');
+							res.end();
+						});
+						server.listen(3000,()=>{
+							console.log('Node server created at port 3000');
+						});
+						```
+
+						u---
+						
+						<img src="./lib/path.png" alt="path" style="border: 0;">
+
+						!---
+						<!-- .slide: data-background="#ffffff" -->
+
+						# Thank You !
+
+						
+
+					</script>
+				</section>
+			
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
